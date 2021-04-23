@@ -1,0 +1,25 @@
+query ListingsSearch {
+    listingsSearch(
+        input: { limit: 24 }
+    ) {
+        listings {
+            id
+            title
+            price {
+                display
+            }
+            shippingPrice {
+                display
+            }
+            images(
+                input: {
+                    transform: "card_square",
+                    count: 1,
+                    scope: "photos",
+                    type: "Product"
+                }) {
+                source
+            }
+        }
+    }
+}
