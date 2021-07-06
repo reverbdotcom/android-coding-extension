@@ -13,7 +13,6 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
-// TODO Clicking on a listing grid item should route to a Details screen
 class IndexFragment : Fragment() {
 
   private lateinit var binding : IndexFragmentBinding
