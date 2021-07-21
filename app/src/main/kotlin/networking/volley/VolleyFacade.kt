@@ -18,7 +18,7 @@ import kotlinx.coroutines.suspendCancellableCoroutine
 class VolleyFacade(private val context : Context) {
 
   private val retryPolicy : RetryPolicy get() = DefaultRetryPolicy(10000, 1, 1.0f)
-  private var requestQueue : RequestQueue = RequestQueue(DiskBasedCache(context.cacheDir), BasicNetwork(HurlStack()))
+  private var requestQueue : RequestQueue = RequestQueue(DiskBasedCache(context.cacheDir), BasicNetwork(HurlStack())).apply { start() }
   /**
    * Fires off the given request, providing additional configuration as necessary.
    * @param request The request to make.

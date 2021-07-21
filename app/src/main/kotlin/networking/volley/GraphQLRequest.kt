@@ -30,12 +30,15 @@ class GraphQLRequest<ResponseType>(
   variables : Any?,
   listener : VolleyResponseListener<ResponseType>,
   graphQlUrl : String,
-
 ) : Request<ResponseType>(Method.POST, graphQlUrl, listener), KoinComponent {
 
   private val listener : VolleyResponseListener<ResponseType>? = errorListener as VolleyResponseListener<ResponseType>?
   private val postObject : JsonObject = buildPostObject(graphQLQuery, variables)
   private var responseStatusCode = 0
+
+  init {
+    setShouldCache(false)
+  }
 
   override fun parseNetworkResponse(response : NetworkResponse) : Response<ResponseType> {
     return try {
@@ -72,10 +75,9 @@ class GraphQLRequest<ResponseType>(
     listener?.onResponse(response, responseStatusCode)
   }
 
+
   override fun getHeaders() : Map<String, String> {
 //    val map : MutableMap<String, String> = defaultHeaders
-//    map[HttpHeaders.ACCEPT] = MIME_TYPE_APPLICATION_JSON
-//    map[HttpHeaders.CONTENT_TYPE] = MIME_TYPE_APPLICATION_JSON
     return defaultHeaders
   }
 
@@ -88,38 +90,7 @@ class GraphQLRequest<ResponseType>(
       bodyJson.addProperty(KEY_VARIABLES, PARSER.toJson(variables))
     }
 
-    // Server wants the "operationName" for easy logging / debugging (which for our purposes is basically always
-    // the named query / mutation in the request since we only do one operation per request) so just parse it out
-    // of the structured query.
-    val operationName = getOperationName(graphQLQuery)
-    if (operationName != null && operationName.isNotEmpty()) {
-      bodyJson.addProperty(KEY_OPERATION_NAME, operationName)
-    }
     return bodyJson
-  }
-
-  private fun getOperationName(graphQLQuery : String) : String? {
-    // Graph requests are in the form [query|mutation] OperationName[(params)] { ... }
-    // So extract the substring from after the space up to the the first `(` or `{`.
-
-    // Operation name should end either at the first open parenthesis if there are parameters
-    // or the open curly brace if there aren't
-    val openParenthesis = graphQLQuery.indexOf('(')
-    val openCurlyBrace = graphQLQuery.indexOf('{')
-    val endIndex = if (openParenthesis in 1 until openCurlyBrace) openParenthesis else openCurlyBrace
-
-    // Operation name should start after either of the `query` or `mutation` keywords
-    var beginIndex = graphQLQuery.indexOf("query")
-    if (beginIndex == -1 || beginIndex > endIndex) {
-      beginIndex = graphQLQuery.indexOf("mutation")
-    }
-    return if (beginIndex == -1 || endIndex == -1) {
-      null
-    } else {
-      // Operation name starts after the space following the operation type keyword
-      beginIndex = graphQLQuery.indexOf(' ', beginIndex)
-      graphQLQuery.substring(beginIndex, endIndex).trim { it <= ' ' }
-    }
   }
 
   companion object {
@@ -131,12 +102,14 @@ class GraphQLRequest<ResponseType>(
 
     private const val HEADER_KEY_ACCEPT_VERSION = "Accept-Version"
     private const val HEADER_KEY_X_SHIPPING_REGION = "X-Shipping-Region"
+    private const val HEADER_KEY_CONTENT_TYPE = "Content-Type"
     private const val HEADER_KEY_ACCEPT = "Accept"
 
     private val defaultHeaders = mapOf(
       HEADER_KEY_ACCEPT_VERSION to "3.0",
       HEADER_KEY_X_SHIPPING_REGION to "US_CON",
-      HEADER_KEY_ACCEPT to "application/hal+json",
+      HEADER_KEY_ACCEPT to "application/json",
+      HEADER_KEY_CONTENT_TYPE to "application/json"
     )
 
     @VisibleForTesting
