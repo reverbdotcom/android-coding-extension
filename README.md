@@ -15,7 +15,7 @@
 - We'll be using GraphQL. We don't expect you to be an expert, but if you want to brush up, [these docs](https://graphql.org/learn/) summarize the spec and feature set nicely. We serve [GraphQL over HTTP](https://graphql.org/learn/serving-over-http/)
 - GraphiQL is great to poke around our GraphQL schema.
   - `brew cask install graphiql` or available [here](https://github.com/skevy/graphiql-app/releases/download/v0.7.2/GraphiQL-0.7.2.dmg)
-- We really like using [Charles Proxy](https://www.charlesproxy.com), the free version is fine. Using a proxy may be helpful, but it's not required.
+- We really like using [Proxyman](https://proxyman.io/), the free version is fine. Using a proxy may be helpful, but it's not required.
 
 ## Libraries Used
 - [Volley](https://developer.android.com/training/volley) for networking, though we don't expect to touch these APIs directly
