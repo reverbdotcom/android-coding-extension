@@ -1,7 +1,8 @@
 package com.reverb.android.onsite
 
 import android.app.Application
-import networking.ApolloWrapper
+import networking.volley.VolleyFacade
+import networking.GraphQLWrapper
 import networking.ImageLoader
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -17,7 +18,8 @@ class MyApplication : Application() {
 
       modules(
         module {
-          single { ApolloWrapper() }
+          single { VolleyFacade(androidContext()) }
+          single { GraphQLWrapper(get(), androidContext()) }
           single { ImageLoader() }
         }
       )

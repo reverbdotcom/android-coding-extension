@@ -1,6 +1,6 @@
 package com.reverb.android.onsite.com
 
-import networking.ApolloWrapper
+import networking.GraphQLWrapper
 import networking.ImageLoader
 import io.mockk.mockk
 import org.junit.rules.TestRule
@@ -41,7 +41,7 @@ class KoinTestRule(
 
   companion object {
     val defaultTestModule =  module {
-      single { mockk<ApolloWrapper>() }
+      single { mockk<GraphQLWrapper>() }
       single { mockk<ImageLoader>() }
     }
   }
