@@ -15,26 +15,21 @@ import kotlinx.coroutines.suspendCancellableCoroutine
 /**
  * Provides a simplified, singleton interface to Volley.
  */
-class VolleyFacade(private val context : Context) {
+class VolleyFacade(context : Context) {
 
   private val retryPolicy : RetryPolicy get() = DefaultRetryPolicy(10000, 1, 1.0f)
-  private var requestQueue : RequestQueue = RequestQueue(DiskBasedCache(context.cacheDir), BasicNetwork(HurlStack())).apply { start() }
-  /**
-   * Fires off the given request, providing additional configuration as necessary.
-   * @param request The request to make.
-   */
-  @JvmOverloads fun makeRequest(request : Request<*>, tag : Any? = null) {
-    request.retryPolicy = retryPolicy
-    request.tag = tag
-    requestQueue.add(request)
-  }
+  private var requestQueue : RequestQueue = RequestQueue(
+    DiskBasedCache(context.cacheDir), BasicNetwork(HurlStack())
+  ).apply { start() }
 
   suspend fun <T : Any> makeRequestSuspended(
     createRequest : (ContinuationVolleyResponseListener<T>) -> Request<T>
   ) : Response<T> {
     return suspendCancellableCoroutine { continuation ->
       val request = createRequest(ContinuationVolleyResponseListener(continuation))
-      makeRequest(request)
+      request.retryPolicy = retryPolicy
+      requestQueue.add(request)
+
       continuation.invokeOnCancellation { request.cancel() }
     }
   }

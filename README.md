@@ -2,7 +2,7 @@
 
 ## App capabilities
 - Displays a list of listings to the user in a grid using RecyclerView
-- Fetches these listings from a Reverb GraphQL API using Apollo
+- Fetches these listings from a Reverb GraphQL API
 - Includes tests for the IndexAdapter
 
 ## Instructions
@@ -18,7 +18,7 @@
 - We really like using [Charles Proxy](https://www.charlesproxy.com), the free version is fine. Using a proxy may be helpful, but it's not required.
 
 ## Libraries Used
-- [Apollo](https://www.apollographql.com/docs/android/essentials/get-started-kotlin/) for GraphQL networking
+- [Volley](https://developer.android.com/training/volley) for networking, though we don't expect to touch these APIs directly
 - [Koin](https://insert-koin.io/) for dependency injection
 - [Glide](https://github.com/bumptech/glide) for image loading
 - [MockK](https://mockk.io/) for mocking in tests

@@ -45,7 +45,6 @@ class GraphQLRequest<ResponseType>(
       responseStatusCode = response.statusCode
       val cacheEntry = HttpHeaderParser.parseCacheHeaders(response)
       val json = String(response.data, Charset.defaultCharset())
-//      val json = String(response.data, HttpHeaderParser.parseCharset(response.headers, ENCODING_UTF_8))
       val responseJson : JsonObject = PARSER.fromJson(json, JsonObject::class.java)
       if (responseJson.getAsJsonArray(KEY_ERRORS) != null) {
         Log.d("GraphQLRequest", "Error fetching with body: $postObject")
@@ -75,22 +74,14 @@ class GraphQLRequest<ResponseType>(
     listener?.onResponse(response, responseStatusCode)
   }
 
-
-  override fun getHeaders() : Map<String, String> {
-//    val map : MutableMap<String, String> = defaultHeaders
-    return defaultHeaders
-  }
-
+  override fun getHeaders() : Map<String, String> = defaultHeaders
   override fun getBody() = PARSER.toJson(postObject).toByteArray(charset(ENCODING_UTF_8))
 
   private fun buildPostObject(graphQLQuery : String, variables : Any?) : JsonObject {
-    val bodyJson = JsonObject()
-    bodyJson.addProperty(KEY_QUERY, graphQLQuery)
-    if (variables != null) {
-      bodyJson.addProperty(KEY_VARIABLES, PARSER.toJson(variables))
+    return JsonObject().apply {
+      addProperty(KEY_QUERY, graphQLQuery)
+      variables?.let { addProperty(KEY_VARIABLES, PARSER.toJson(it)) }
     }
-
-    return bodyJson
   }
 
   companion object {
@@ -113,7 +104,6 @@ class GraphQLRequest<ResponseType>(
     )
 
     @VisibleForTesting
-    val KEY_OPERATION_NAME = "operationName"
     private const val KEY_DATA = "data"
     private const val KEY_ERRORS = "errors"
     val PARSER : Gson = GsonBuilder().run {
