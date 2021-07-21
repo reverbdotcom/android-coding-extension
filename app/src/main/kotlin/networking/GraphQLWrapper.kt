@@ -1,24 +1,20 @@
 package networking
 
 import android.content.Context
-import com.reverb.app.core.api.volley.Response
+import networking.volley.Response
 import models.ListingsSearchQueryModel
 import networking.volley.GraphQLRequest
 import networking.volley.VolleyFacade
-import org.koin.core.component.KoinApiExtension
 import java.io.BufferedReader
-import java.io.File
-import java.io.IOException
 import java.io.InputStreamReader
 
 class GraphQLWrapper(private val volley : VolleyFacade, private val context : Context) {
 
   private val listingsSearchQuery by lazy { getQuery("ListingsIndex.graphql") }
 
-  @KoinApiExtension
   suspend fun getListingsResponse() : Response<ListingsSearchQueryModel> {
     return volley.makeRequestSuspended {
-      GraphQLRequest.createRqlRequest<ListingsSearchQueryModel>(listingsSearchQuery, it)
+      GraphQLRequest.createRqlRequest(listingsSearchQuery, it)
     }
   }
 

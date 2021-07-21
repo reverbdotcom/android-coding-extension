@@ -8,8 +8,6 @@ import com.android.volley.RetryPolicy
 import com.android.volley.toolbox.BasicNetwork
 import com.android.volley.toolbox.DiskBasedCache
 import com.android.volley.toolbox.HurlStack
-import com.reverb.app.core.api.volley.ContinuationVolleyResponseListener
-import com.reverb.app.core.api.volley.Response
 import kotlinx.coroutines.suspendCancellableCoroutine
 
 /**

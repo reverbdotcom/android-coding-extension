@@ -11,10 +11,9 @@ import org.koin.core.component.KoinComponent
 /**
  * Base class for wrapping [VolleyError] with more specific info.
  */
-@KoinApiExtension
 open class ReverbApiError(
   private val wrappedError : VolleyError
-  ) : VolleyError(wrappedError.networkResponse), KoinComponent {
+  ) : VolleyError(wrappedError.networkResponse) {
 
   /**
    * Re-declares the [message] property so it's non-null since we expect to always have a valid error from the APIs.

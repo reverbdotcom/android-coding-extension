@@ -8,7 +8,6 @@ import org.koin.core.component.KoinApiExtension
 /**
  * Convenience for handling Volley success and error responses in one object.
  */
-@KoinApiExtension
 abstract class VolleyResponseListener<T> : Response.Listener<T>, Response.ErrorListener {
   /**
    * Wraps the base [.onErrorResponse] method to provide

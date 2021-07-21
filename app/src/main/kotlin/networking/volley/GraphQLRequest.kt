@@ -23,14 +23,13 @@ import java.nio.charset.Charset
  * Request type for interacting with GraphQL endpoints.
  * @param <ResponseType> Type expected to be parsed on a successful response.
 </ResponseType> */
-@KoinApiExtension
 class GraphQLRequest<ResponseType>(
   private val mResponseTypeClass : Class<ResponseType>,
   graphQLQuery : String,
   variables : Any?,
   listener : VolleyResponseListener<ResponseType>,
   graphQlUrl : String,
-) : Request<ResponseType>(Method.POST, graphQlUrl, listener), KoinComponent {
+) : Request<ResponseType>(Method.POST, graphQlUrl, listener) {
 
   private val listener : VolleyResponseListener<ResponseType>? = errorListener as VolleyResponseListener<ResponseType>?
   private val postObject : JsonObject = buildPostObject(graphQLQuery, variables)

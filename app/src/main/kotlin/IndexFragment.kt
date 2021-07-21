@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.reverb.android.onsite.R
 import com.reverb.android.onsite.databinding.IndexFragmentBinding
-import com.reverb.app.core.api.volley.Response
+import networking.volley.Response
 import networking.GraphQLWrapper
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
