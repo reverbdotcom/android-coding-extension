@@ -8,11 +8,11 @@ import networking.volley.VolleyFacade
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
-class GraphQLWrapper(private val volley : VolleyFacade, private val context : Context) {
+class ReverbApi(private val volley : VolleyFacade, private val context : Context) {
 
   private val listingsSearchQuery by lazy { getQuery("ListingsIndex.graphql") }
 
-  suspend fun getListingsResponse() : Response<ListingsSearchQueryModel> {
+  suspend fun getSearchListings() : Response<ListingsSearchQueryModel> {
     return volley.makeRequestSuspended {
       GraphQLRequest.createRqlRequest(listingsSearchQuery, it)
     }

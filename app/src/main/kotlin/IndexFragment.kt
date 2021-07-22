@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.reverb.android.onsite.R
 import com.reverb.android.onsite.databinding.IndexFragmentBinding
 import networking.volley.Response
-import networking.GraphQLWrapper
+import networking.ReverbApi
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -19,7 +19,7 @@ class IndexFragment : Fragment() {
 
   private lateinit var binding : IndexFragmentBinding
 
-  private val graphQLWrapper : GraphQLWrapper by inject()
+  private val reverbApi : ReverbApi by inject()
 
   override fun onCreateView(inflater : LayoutInflater, container : ViewGroup?, savedInstanceState : Bundle?) : View {
     binding = IndexFragmentBinding.inflate(inflater, container, false).apply {
@@ -35,7 +35,7 @@ class IndexFragment : Fragment() {
   private fun fetchData() = MainScope().launch {
     binding.pullToRefresh.isRefreshing = true
 
-    when (val response = graphQLWrapper.getListingsResponse()) {
+    when (val response = reverbApi.getSearchListings()) {
       is Response.Success -> binding.recyclerView.adapter = IndexAdapter(response.data.listingsSearch.listings)
       is Response.Failure -> Toast.makeText(context, R.string.listing_fetch_failed_toast, Toast.LENGTH_SHORT).show()
     }

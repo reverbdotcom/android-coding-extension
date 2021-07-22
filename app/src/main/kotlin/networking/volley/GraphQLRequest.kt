@@ -21,8 +21,7 @@ import java.nio.charset.Charset
 
 /**
  * Request type for interacting with GraphQL endpoints.
- * @param <ResponseType> Type expected to be parsed on a successful response.
-</ResponseType> */
+ */
 class GraphQLRequest<ResponseType>(
   private val mResponseTypeClass : Class<ResponseType>,
   graphQLQuery : String,
