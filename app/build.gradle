@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'com.apollographql.android'
 
 android {
     compileSdkVersion 30
@@ -32,9 +31,6 @@ android {
         enabled = true
         enabledForTests = true
     }
-    apollo {
-        useJavaBeansSemanticNaming = true
-    }
     sourceSets {
 
         androidTest {
@@ -62,12 +58,12 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.6.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation "androidx.recyclerview:recyclerview:1.2.1"
+    implementation 'com.android.volley:volley:1.2.0'
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     implementation 'com.google.android.material:material:1.4.0'
+    implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2'
 
-    implementation 'com.apollographql.apollo:apollo-runtime:1.2.0'
-    implementation 'com.apollographql.apollo:apollo-coroutines-support:1.2.0'
     implementation "org.koin:koin-android:2.2.2"
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 

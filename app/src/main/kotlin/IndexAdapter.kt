@@ -4,14 +4,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.reverb.android.onsite.databinding.ListingGridItemBinding
+import models.ListingsSearchQueryModel
 import networking.ImageLoader
-import networking.ListingModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 @Suppress("EXPERIMENTAL_API_USAGE")
 class IndexAdapter(
-  private val listings : List<ListingModel>
+  private val listings : List<ListingsSearchQueryModel.ListingModel>
 ) : RecyclerView.Adapter<ViewHolder>(), KoinComponent {
 
   private val imageLoader : ImageLoader by inject()
