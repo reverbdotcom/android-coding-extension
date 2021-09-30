@@ -12,9 +12,7 @@ import networking.ReverbApi
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
-import org.koin.core.component.KoinApiExtension
 
-@KoinApiExtension
 class IndexFragment : Fragment() {
 
   private lateinit var binding : IndexFragmentBinding

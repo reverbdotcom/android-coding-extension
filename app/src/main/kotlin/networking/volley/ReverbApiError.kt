@@ -1,12 +1,6 @@
 package networking.volley
 
-import android.text.TextUtils
-import android.util.Log
 import com.android.volley.VolleyError
-import com.google.gson.JsonObject
-import networking.volley.GraphQLRequest
-import org.koin.core.component.KoinApiExtension
-import org.koin.core.component.KoinComponent
 
 /**
  * Base class for wrapping [VolleyError] with more specific info.

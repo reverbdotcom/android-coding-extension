@@ -2,7 +2,6 @@ package networking.volley
 
 import com.android.volley.NetworkResponse
 import com.android.volley.ParseError
-import org.koin.core.component.KoinApiExtension
 
 /**
  * Class for wrapping a Volley [ParseError] so we can add more specific logging and
