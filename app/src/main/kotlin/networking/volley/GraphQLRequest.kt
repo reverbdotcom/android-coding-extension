@@ -13,8 +13,6 @@ import com.google.gson.GsonBuilder
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import com.google.gson.JsonSyntaxException
-import org.koin.core.component.KoinApiExtension
-import org.koin.core.component.KoinComponent
 import java.io.UnsupportedEncodingException
 import java.nio.charset.Charset
 

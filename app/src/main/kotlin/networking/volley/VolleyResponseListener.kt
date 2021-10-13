@@ -1,9 +1,7 @@
 package networking.volley
 
-import android.util.Log
 import com.android.volley.Response
 import com.android.volley.VolleyError
-import org.koin.core.component.KoinApiExtension
 
 /**
  * Convenience for handling Volley success and error responses in one object.
