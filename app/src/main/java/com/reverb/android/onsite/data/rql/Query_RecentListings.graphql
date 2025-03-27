@@ -1,0 +1,26 @@
+query Android_Onsite_RecentListings {
+    listingsSearch (
+        input: {
+            limit: 24,
+            sort: CREATED_AT_DESC
+        }
+    ) {
+        listings {
+            id
+            title
+            images(
+                input: {
+                    namedTransform: LARGE,
+                    count: 1
+                }
+            ) {
+                source
+            }
+            pricing {
+                buyerPrice {
+                    display
+                }
+            }
+        }
+    }
+}
