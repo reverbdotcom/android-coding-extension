@@ -1,6 +1,3 @@
 <resources>
-    <string name="app_name">Code Extension</string>
-
-    <string name="listing_image_content_description">Listing Image</string>
-    <string name="listing_fetch_failed_toast">Error fetching listings</string>
+    <string name="app_name">Reverb Android Onsite</string>
 </resources>
