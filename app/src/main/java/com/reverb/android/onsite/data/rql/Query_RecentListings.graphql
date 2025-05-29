@@ -1,8 +1,10 @@
-query Android_Onsite_RecentListings {
+query Android_Onsite_RecentListings(
+    $sort: reverb_search_ListingsSearchRequest_Sort!
+) {
     listingsSearch (
         input: {
             limit: 24,
-            sort: CREATED_AT_DESC
+            sort: $sort
         }
     ) {
         listings {
