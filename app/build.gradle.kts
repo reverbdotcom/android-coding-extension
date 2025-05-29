@@ -42,8 +42,8 @@ android {
 }
 
 apollo {
-  service("rql") {
-    srcDir("src/main/java/com/reverb/android/onsite/data/rql/")
+  service("graphql") {
+    srcDir("src/main/java/com/reverb/android/onsite/data/graphql/")
     packageName.set("com.reverb.android.onsite")
     codegenModels.set("responseBased")
     mapScalar("Timestamp", "java.util.Date", "com.apollographql.apollo.adapter.DateAdapter")
